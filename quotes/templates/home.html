@@ -1,1 +1,33 @@
-<h1>hello world!</h1>
+{% extends 'base.html' %} 
+
+{% block content %}
+
+{% if ticker  %}
+  {{ ticker }}
+{% endif %}
+
+{% if api_result %}
+  {% if api_result == "Error..." %}
+    There was a problem, please try again..
+  {% else %}
+    <h1>{{ api_result.companyName }}</h1><br/>
+    Latest Price: ${{ api_result.latestPrice }}<br/>
+    Previous Close: ${{ api_result.previousClose }}<br/>
+    Market Cap: ${{ api_result.marketCap }}<br/>
+    YTD Change: ${{ api_result.ytdChange }}<br/>
+    52 Wk High: ${{ api_result.week52High }}<br/>
+    52 Wk Low: ${{ api_result.week52Low }}<br/>
+
+<!-- show all items in api_result dictionary
+    {% for key, value in api_result.items %}
+      {{ key }}: {{ value }}<br/>
+    {% endfor %}
+    <br/>
+    {{api_result}}
+-->   
+    
+  {% endif %}
+{% endif %}
+
+{% endblock %}
+
